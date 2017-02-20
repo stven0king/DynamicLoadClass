@@ -1,6 +1,7 @@
 package tzx.com.dynloadclass;
 
-import android.util.Log;
+import android.content.Context;
+import android.widget.Toast;
 
 /**
  * Created by tanzhenxing
@@ -9,7 +10,7 @@ import android.util.Log;
  */
 
 public class Test {
-    public Test() {
-        Log.d("Test", "Test");
+    public Test(Context context) {
+        Toast.makeText(context, "Test", Toast.LENGTH_SHORT).show();
     }
 }

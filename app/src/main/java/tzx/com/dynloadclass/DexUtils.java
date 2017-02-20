@@ -1,6 +1,8 @@
 package tzx.com.dynloadclass;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import java.io.File;
@@ -15,14 +17,24 @@ import dalvik.system.DexClassLoader;
  */
 
 public class DexUtils {
+    //和导出之前的包名和类名保持一致
+    public static final String mClassName = "tzx.com.dynloadclass.Test";
 
-    public static final String mClassName = "tzx.com.dynloadclass.Test";//和导出之前的包名和类名保持一致
-
+    /**
+     * Description:获取动态加载的dex包的sdcard路径
+     * created by tanzhenxing(谭振兴)
+     * created data 17-2-20 下午3:51
+     */
     public static String getDynamicDexPath() {
         return android.os.Environment.getExternalStorageDirectory()
                 .getAbsolutePath() + "/Test.dex";// 前半部分为获得SD卡的目录
     }
 
+    /**
+     * Description:获取制定parent-classloader的DexClassLoader对象
+     * created by tanzhenxing(谭振兴)
+     * created data 17-2-20 下午3:53
+     */
     public static DexClassLoader getCustomerDexClassLoader(Context context, ClassLoader loader) {
         String mDexPath = getDynamicDexPath();
         File dexOutputDir = context.getDir("dex", 0);//
@@ -36,6 +48,11 @@ public class DexUtils {
         return getCustomerDexClassLoader(context, context.getClassLoader());
     }
 
+    /**
+     * Description:合并两个Array，按照first-second顺序
+     * created by tanzhenxing(谭振兴)
+     * created data 17-2-20 下午3:54
+     */
     public static Object combineArray(Object firstArray, Object secondArray) {
         Class<?> localClass = firstArray.getClass().getComponentType();
         int firstArrayLength = Array.getLength(firstArray);
