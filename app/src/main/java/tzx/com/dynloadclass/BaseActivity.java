@@ -47,9 +47,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Toolbar.
             case R.id.load:
                 loadClass();
                 break;
-            case R.id.restart:
-                restartApplication(mContext);
-                break;
 
         }
         return false;

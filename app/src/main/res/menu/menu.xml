@@ -4,6 +4,4 @@
         android:title="show"/>
     <item android:id="@+id/load"
           android:title="loadclass"/>
-    <item android:id="@+id/restart"
-          android:title="restart" />
 </menu>
