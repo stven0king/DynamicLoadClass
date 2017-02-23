@@ -20,6 +20,7 @@
 ![ThirdActivity](http://oltcsi62w.bkt.clouddn.com/image/github/dyloadclass-third.gif)
 
 ##运行代码注意
+程序运行版本5.0以上（PS：Android5.0一下版本会有65535的问题）
 Test.dex文件，我测试的时候是放在sdcard的根目录下
 ```
 /**
