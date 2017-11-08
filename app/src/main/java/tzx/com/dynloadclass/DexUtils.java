@@ -7,6 +7,7 @@ import android.util.Log;
 
 import java.io.File;
 import java.lang.reflect.Array;
+import java.util.logging.Logger;
 
 import dalvik.system.DexClassLoader;
 
@@ -37,7 +38,8 @@ public class DexUtils {
      */
     public static DexClassLoader getCustomerDexClassLoader(Context context, ClassLoader loader) {
         String mDexPath = getDynamicDexPath();
-        File dexOutputDir = context.getDir("dex", 0);//
+        ///data/user/0/tzx.com.dynloadclass/app_dex
+        File dexOutputDir = context.getDir("dex", 0);
         File file = new File(mDexPath);
         DexClassLoader classLoader = new DexClassLoader(file.getAbsolutePath(),
                 dexOutputDir.getAbsolutePath(), null, loader);

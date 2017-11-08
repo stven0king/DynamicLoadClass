@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/DynLoadClass.iml" filepath="$PROJECT_DIR$/DynLoadClass.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DynamicLoadClass.iml" filepath="$PROJECT_DIR$/DynamicLoadClass.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

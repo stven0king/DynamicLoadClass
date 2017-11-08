@@ -22,6 +22,13 @@ public class MainActivity extends AppCompatActivity {
             "SecondActivity",
             "ThirdActivity"
     };
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

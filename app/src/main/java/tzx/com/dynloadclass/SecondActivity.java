@@ -21,14 +21,16 @@ public class SecondActivity  extends BaseActivity {
     }
 
     protected void loadClass() {
-        BaseDexClassLoader baseDexClassLoader = (BaseDexClassLoader) this.getClassLoader();
-        ClassLoader baseSourceDexClassLocaderParent = baseDexClassLoader.getParent();
+        //dexClassLoader  instanceof PathClassLoader
+        BaseDexClassLoader dexClassLoader = (BaseDexClassLoader) this.getClassLoader();
+        ClassLoader baseSourceDexClassLocaderParent = dexClassLoader.getParent();
         DexClassLoader classLoader = DexUtils.getCustomerDexClassLoader(this, baseSourceDexClassLocaderParent);
 
         try {
-            Field classLoaderField = baseDexClassLoader.getClass().getSuperclass().getSuperclass().getDeclaredField("parent");
+            Field classLoaderField = dexClassLoader.getClass().getSuperclass().getSuperclass().getDeclaredField("parent");
             classLoaderField.setAccessible(true);
-            classLoaderField.set(baseDexClassLoader, classLoader);
+            //CustomerDexClassLoader is made PathClassLoader's parent
+            classLoaderField.set(dexClassLoader, classLoader);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (NoSuchFieldException e) {

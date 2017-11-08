@@ -24,22 +24,29 @@ public class ThirdActivity extends BaseActivity {
     protected void loadClass() {
 
         try {
+            //baseDexClassLoader  instanceof PathClassLoader
             BaseDexClassLoader baseDexClassLoader = (BaseDexClassLoader) this.getClassLoader();
+            //BaseDexClassLoader  DexPathList:pathList
             Field baseDexClassLoaderField = baseDexClassLoader.getClass().getSuperclass().getDeclaredField("pathList");
             baseDexClassLoaderField.setAccessible(true);
+            //DexPathList:pathList
             Object mPathList = baseDexClassLoaderField.get(baseDexClassLoader);
+            //DexPathList    Element[]:dexElements
             Field pathListField = mPathList.getClass().getDeclaredField("dexElements");
             pathListField.setAccessible(true);
+            //Element[]:dexElements
             Object dexElements = pathListField.get(mPathList);
 
+            //CustomerDexClassLoader
             DexClassLoader dexClassLoader = DexUtils.getCustomerDexClassLoader(this, this.getClassLoader());
             Field dexClassLoaderField = dexClassLoader.getClass().getSuperclass().getDeclaredField("pathList");
             dexClassLoaderField.setAccessible(true);
             Object mPathList_ = dexClassLoaderField.get(dexClassLoader);
             Field pathListField_ = mPathList_.getClass().getDeclaredField("dexElements");
             pathListField_.setAccessible(true);
+            //CustomerDexClassLoader    Element[]:dexElements
             Object dexElements_ = pathListField_.get(mPathList_);
-
+            //combine  CustomerDexClassLoader's dexElements and PathClassLoader's  dexElements
             Object allElements = DexUtils.combineArray(dexElements_, dexElements);
             pathListField.setAccessible(true);
             pathListField.set(mPathList, allElements);
@@ -53,8 +60,17 @@ public class ThirdActivity extends BaseActivity {
 
     @Override
     protected void show() {
-        Test test = new Test(mContext);
-        //Class loadClass = Class.forName(DexUtils.mClassName);
-        //Object obj = loadClass.newInstance();
+        //Test test = new Test(mContext);
+        Class loadClass = null;
+        try {
+            loadClass = Class.forName(DexUtils.mClassName);
+            Object obj = loadClass.newInstance();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        }
     }
 }
