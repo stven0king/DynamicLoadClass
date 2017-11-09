@@ -1,6 +1,10 @@
 package tzx.com.dynloadclass;
 
+import android.content.Context;
+
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 
 import dalvik.system.BaseDexClassLoader;
 import dalvik.system.DexClassLoader;
@@ -41,5 +45,21 @@ public class SecondActivity  extends BaseActivity {
     @Override
     protected void show() {
         Test test = new Test(mContext);
+        //Class loadClass = null;
+        //try {
+        //    loadClass = Class.forName(DexUtils.mClassName);
+        //    Constructor<?> constructor = loadClass.getConstructor(new Class[] {Context.class});//得到构造器
+        //    Object object = constructor.newInstance(new Object[] {mContext});//实例化
+        //} catch (ClassNotFoundException e) {
+        //    e.printStackTrace();
+        //} catch (IllegalAccessException e) {
+        //    e.printStackTrace();
+        //} catch (InstantiationException e) {
+        //    e.printStackTrace();
+        //} catch (NoSuchMethodException e) {
+        //    e.printStackTrace();
+        //} catch (InvocationTargetException e) {
+        //    e.printStackTrace();
+        //}
     }
 }

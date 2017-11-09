@@ -60,17 +60,22 @@ public class ThirdActivity extends BaseActivity {
 
     @Override
     protected void show() {
-        //Test test = new Test(mContext);
-        Class loadClass = null;
-        try {
-            loadClass = Class.forName(DexUtils.mClassName);
-            Object obj = loadClass.newInstance();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        }
+        Test test = new Test(mContext);
+        //Class loadClass = null;
+        //try {
+        //    loadClass = Class.forName(DexUtils.mClassName);
+        //    Constructor<?> constructor = loadClass.getConstructor(new Class[] {Context.class});//得到构造器
+        //    Object object = constructor.newInstance(new Object[] {mContext});//实例化
+        //} catch (ClassNotFoundException e) {
+        //    e.printStackTrace();
+        //} catch (IllegalAccessException e) {
+        //    e.printStackTrace();
+        //} catch (InstantiationException e) {
+        //    e.printStackTrace();
+        //} catch (NoSuchMethodException e) {
+        //    e.printStackTrace();
+        //} catch (InvocationTargetException e) {
+        //    e.printStackTrace();
+        //}
     }
 }

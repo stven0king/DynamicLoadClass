@@ -9,6 +9,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.io.File;
+
 public class MainActivity extends AppCompatActivity {
     private ListView listView;
     Toolbar toolbar;
@@ -26,7 +28,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
+        //dex文件写入磁盘
+        DexUtils.prepareDex(this.getApplicationContext(), new File(DexUtils.getDynamicDexPath()), DexUtils.dexPath);
     }
 
     @Override

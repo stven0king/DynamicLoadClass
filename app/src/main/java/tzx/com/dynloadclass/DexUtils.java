@@ -5,7 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.lang.reflect.Array;
 import java.util.logging.Logger;
 
@@ -20,6 +25,8 @@ import dalvik.system.DexClassLoader;
 public class DexUtils {
     //和导出之前的包名和类名保持一致
     public static final String mClassName = "tzx.com.dynloadclass.Test";
+    //assets目录下的dex文件名称
+    public static final String dexPath = "Test.dex";
 
     /**
      * Description:获取动态加载的dex包的sdcard路径
@@ -28,7 +35,7 @@ public class DexUtils {
      */
     public static String getDynamicDexPath() {
         return android.os.Environment.getExternalStorageDirectory()
-                .getAbsolutePath() + "/Test.dex";// 前半部分为获得SD卡的目录
+                .getAbsolutePath() + File.separator + dexPath;// 前半部分为获得SD卡的目录
     }
 
     /**
@@ -69,4 +76,34 @@ public class DexUtils {
         }
         return result;
     }
+
+
+    private static final int BUF_SIZE = 2048;
+
+    /**
+     * Description:  将assets目录下面的dex_file文件写入dexInternalStoragePath文件中
+     * @param context 上下问环境
+     * @param dexInternalStoragePath 存储在磁盘上的dex文件
+     * @param dex_file assets目录下的dex文件名称
+     */
+    public static boolean prepareDex(Context context, File dexInternalStoragePath, String dex_file) {
+        BufferedInputStream bis = null;
+        OutputStream dexWriter = null;
+        try {
+            bis = new BufferedInputStream(context.getAssets().open(dex_file));
+            dexWriter = new BufferedOutputStream(new FileOutputStream(dexInternalStoragePath));
+            byte[] buf = new byte[BUF_SIZE];
+            int len;
+            while ((len = bis.read(buf, 0, BUF_SIZE)) > 0) {
+                dexWriter.write(buf, 0, len);
+            }
+            dexWriter.close();
+            bis.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return true;
+
+    }
+
 }
