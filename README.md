@@ -18,6 +18,8 @@
 
 因为没多对多dex文件做处理，所以Demo生成的唯一的dex会被打上CLASS_ISPREVERIFIED标识。
 程序在5.0以下的Android系统中运行会报错：
+
 ```java
 java.lang.IllegalAccessError: Class ref in pre-verified class resolved to unexpected implementation
 ```
+当然使用反射除外，反射调用其他dex中的类的方法时是不校验CLASS_ISPREVERIFIED的。
